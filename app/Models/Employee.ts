@@ -14,6 +14,9 @@ export default class Employee extends BaseModel {
   public user: BelongsTo<typeof User>
 
   @column()
+  public role: string
+
+  @column()
   public cnpj: number
 
   @column.dateTime({ autoCreate: true })

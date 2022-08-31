@@ -25,6 +25,7 @@ export default class EmployeesController {
 
         const employee = new Employee()
         employee.userId = user.id
+        employee.role = data.role
         if (data.cnpj != null) {
             employee.cnpj = data.cnpj
         }
@@ -57,18 +58,19 @@ export default class EmployeesController {
         // Verifica se é um funcionário
         try {
             const employee = await Employee.findByOrFail('userId', user.id)
-
+            
+            employee.role = data.role
             if (data.cnpj) {
                 employee.cnpj = data.cnpj
-                employee.save()
             }
+            await employee.save()
         } catch (error) {
             return response.badRequest('O usuário não é um funcionário')
         }
 
         user.name = data.name
         user.email = data.email
-        user.save()
+        await user.save()
 
         return response.status(204)
     }
