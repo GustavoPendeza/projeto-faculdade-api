@@ -14,18 +14,18 @@ export default class AuthController {
     public async login({ auth, request, response }: HttpContextContract) {
         const { email, password } = request.all()
 
-        const user = await User.query().where('email', email).preload('student')
-
-        if (user[0].student) {
-            if (user[0].student.status != 'Ativo') {
-                return response.status(403).json({
-                    'message': 'A conta desse e-mail foi desativada'
-                })
-            }
-        }
-
         try {
             const token = await auth.attempt(email, password)
+
+            const user = await User.query().where('email', email).preload('student')
+
+            if (user[0].student) {
+                if (user[0].student.status != 'Ativo') {
+                    return response.status(403).json({
+                        'message': 'Essa conta foi desativada'
+                    })
+                }
+            }
 
             return token.toJSON()
         } catch (error) {
