@@ -8,6 +8,20 @@ import UpdateEmployeeValidator from 'App/Validators/UpdateEmployeeValidator'
 export default class EmployeesController {
 
     /**
+     * Retorna uma lista com todos os funcionários
+     * 
+     * @returns Array<User, Employee>
+     */
+    public async list() {
+        const employees = await User.query()
+            .join('employees', 'users.id', 'employees.user_id')
+            .select('users.*')
+            .preload('employee')
+        
+        return employees
+    }
+
+    /**
      * Cadastra um funcionário
      * 
      * @param request RequestContract

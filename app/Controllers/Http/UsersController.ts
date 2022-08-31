@@ -23,4 +23,23 @@ export default class UsersController {
         return response.status(204)
     }
 
+    /**
+     * Altera a senha de um usuário
+     * 
+     * @param params id
+     * @param request RequestContract
+     * @param response ResponseContract
+     * @returns Response
+     */
+    public async updateUserPassword({ params, request, response }: HttpContextContract) {
+        const user = await User.findOrFail(params.id)
+
+        const data = await request.validate(UpdatePasswordValidator)
+
+        user.password = data.password
+        user.save()
+
+        return response.status(204)
+    }
+
 }
