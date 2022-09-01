@@ -59,7 +59,7 @@ export default class EmployeesController {
     /**
      * Altera um funcionário
      * 
-     * @param params id
+     * @param params User.id
      * @param request RequestContract
      * @param response ResponseContract
      * @returns Response
@@ -67,7 +67,6 @@ export default class EmployeesController {
     public async update({ params, request, response }: HttpContextContract) {
         const data = await request.validate(UpdateEmployeeValidator)
 
-        // Busca o usuário
         const user = await User.findOrFail(params.id)
         // Verifica se é um funcionário
         try {

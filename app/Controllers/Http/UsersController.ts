@@ -18,7 +18,7 @@ export default class UsersController {
         const data = await request.validate(UpdatePasswordValidator)
 
         user.password = data.password
-        user.save()
+        await user.save()
 
         return response.status(204)
     }
@@ -26,7 +26,7 @@ export default class UsersController {
     /**
      * Altera a senha de um usuário
      * 
-     * @param params id
+     * @param params User.id
      * @param request RequestContract
      * @param response ResponseContract
      * @returns Response
@@ -37,7 +37,7 @@ export default class UsersController {
         const data = await request.validate(UpdatePasswordValidator)
 
         user.password = data.password
-        user.save()
+        await user.save()
 
         return response.status(204)
     }

@@ -47,7 +47,7 @@ export default class StudentsController {
     /**
      * Altera um usuário
      * 
-     * @param params id
+     * @param params User.id
      * @param request RequestContract
      * @param response ResponseContract
      * @returns Response
@@ -55,7 +55,6 @@ export default class StudentsController {
     public async update({ params, request, response }: HttpContextContract) {
         const data = await request.validate(UpdateStudentValidator)
 
-        // Busca o usuário
         const user = await User.findOrFail(params.id)
         // Verifica se é um aluno
         try {
@@ -79,7 +78,7 @@ export default class StudentsController {
     /**
      * Expulsa um aluno
      * 
-     * @param params id
+     * @param params User.id
      * @param response ResponseContract
      * @returns Response
      */
@@ -92,7 +91,7 @@ export default class StudentsController {
             }
 
             student.status = 'Expulso'
-            student.save()
+            await student.save()
 
             return response.status(204)
         } catch (error) {

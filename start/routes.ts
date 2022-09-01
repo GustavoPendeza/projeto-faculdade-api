@@ -19,11 +19,14 @@ Route.group(() => {
 
       Route.post('employee/register', 'EmployeesController.register')
       Route.post('student/register', 'StudentsController.register')
+      Route.post('admin/create', 'AdminsController.create')
 
       Route.patch('employee/update/:id', 'EmployeesController.update')
       Route.patch('user/update-password/:id', 'UsersController.updateUserPassword')
       Route.patch('student/update/:id', 'StudentsController.update')
       Route.patch('student/expel/:id', 'StudentsController.expelStudent')
+
+      Route.delete('admin/delete/:id', 'AdminsController.delete')
 
     }).middleware('admin')
 
