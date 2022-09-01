@@ -1,16 +1,15 @@
 import { DateTime } from 'luxon'
-import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
-import Employee from './Employee'
+import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
-export default class Admin extends BaseModel {
+export default class Course extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
   @column()
-  public employeeId: number
+  public name: string
 
-  @belongsTo(() => Employee)
-  public employee: BelongsTo<typeof Employee>
+  @column()
+  public description: string
 
   @column.dateTime({ autoCreate: true, serialize: (value:DateTime) => value.toFormat("DD 'às' HH:mm:s") })
   public createdAt: DateTime
