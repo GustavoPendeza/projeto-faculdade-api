@@ -9,7 +9,7 @@ export default class Student {
     const student = await user!.middlewareStudent()
 
     if (!student) {
-      return response.status(401).json({
+      return response.status(403).json({
         message: 'Você não tem permissão para realizar essa ação.'
       })
     } else if (student.status != 'Ativo') {

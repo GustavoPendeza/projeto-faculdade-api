@@ -1,7 +1,7 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Admin from 'App/Models/Admin'
 import Employee from 'App/Models/Employee'
-import AdminCreateValidator from 'App/Validators/AdminCreateValidator'
+import CreateAdminValidator from 'App/Validators/CreateAdminValidator'
 
 export default class AdminsController {
 
@@ -12,14 +12,12 @@ export default class AdminsController {
      * @param response ResponseContract
      * @returns Response
      */
-    public async create({ request, response }: HttpContextContract) {
-        const data = await request.validate(AdminCreateValidator)
+    public async store({ request, response }: HttpContextContract) {
+        const data = await request.validate(CreateAdminValidator)
 
-        const admin = new Admin()
-        admin.employeeId = data.employeeId
-        await admin.save()
+        const admin = await Admin.create(data)
 
-        return response.status(204)
+        return response.created(admin)
     }
 
     /**
@@ -29,12 +27,12 @@ export default class AdminsController {
      * @param response ResponseContract
      * @returns Response
      */
-    public async delete({ params, response }: HttpContextContract) {
+    public async destroy({ params, response }: HttpContextContract) {
         // Verifica se o funcionário existe
         try {
             await Employee.findOrFail(params.id)
         } catch (error) {
-            return response.badRequest('O funcionário não existe')
+            return response.status(404).json('O funcionário não existe')
         }
 
         // Verifica se o funcionário está cadastrado como admin

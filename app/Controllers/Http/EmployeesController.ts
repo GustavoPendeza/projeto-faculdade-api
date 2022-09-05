@@ -10,13 +10,10 @@ export default class EmployeesController {
     /**
      * Retorna uma lista com todos os funcionários
      * 
-     * @returns Array<User, Employee>
+     * @returns Array<Employee, User, Admin>
      */
     public async list() {
-        const employees = await User.query()
-            .join('employees', 'users.id', 'employees.user_id')
-            .select('users.*')
-            .preload('employee')
+        const employees = await Employee.query().select('*').preload('user').preload('admin')
         
         return employees
     }

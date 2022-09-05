@@ -9,7 +9,7 @@ export default class Admin {
     const admin = await user!.middlewareAdmin()
 
     if (!admin) {
-      return response.status(401).json({
+      return response.status(403).json({
         message: 'Você não tem permissão para realizar essa ação.'
       })
     }

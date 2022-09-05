@@ -21,9 +21,11 @@ export default class RegisterEmployeeValidator {
     role: schema.enum(
       ['Coordenador(a)', 'Professor(a)', 'Secretario(a)'] as const
     ),
-    cnpj: schema.number.nullableAndOptional([
+    cnpj: schema.string.nullableAndOptional({}, [
       rules.trim(),
-      rules.unique({ table: 'employees', column: 'cnpj', caseInsensitive: true })
+      rules.minLength(14),
+      rules.maxLength(14),
+      rules.unique({ table: 'employees', column: 'cnpj' })
     ]),
     admin: schema.boolean([])
   })
@@ -36,7 +38,8 @@ export default class RegisterEmployeeValidator {
     'password_confirmation.confirmed': 'Os campos senha e confirmar senha devem ser iguais',
     'password.minLength': 'O campo senha deve ter no mínimo 6 caracteres',
     'role.required': 'O campo de cargo é obrigatório',
-    'cnpj.number': 'Digite apenas os números do CNPJ',
+    'cnpj.minLength': 'O CNPJ tem 14 digitos. Digite apenas os números do CNPJ',
+    'cnpj.maxLength': 'O CNPJ tem 14 digitos. Digite apenas os números do CNPJ',
     'cnpj.unique': 'Esse CNPJ já está sendo utilizado por outro funcionário',
     'admin.required': 'O campo admin é obrigatório',
     'admin.boolean': 'O campo admin é boolean, deve ser verdadeiro ou falso'

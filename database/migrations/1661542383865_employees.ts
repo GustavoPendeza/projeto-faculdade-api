@@ -13,7 +13,7 @@ export default class extends BaseSchema {
         .onDelete('CASCADE')
         .notNullable()
       table.string('role', 255).notNullable()
-      table.integer('cnpj', 14).nullable()
+      table.string('cnpj', 14).nullable()
       table.timestamp('created_at', { useTz: true }).notNullable().defaultTo(this.now())
       table.timestamp('updated_at', { useTz: true }).notNullable().defaultTo(this.now())
     })

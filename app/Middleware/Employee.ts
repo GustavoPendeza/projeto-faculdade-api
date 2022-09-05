@@ -9,7 +9,7 @@ export default class Employee {
     const employee = await user!.middlewareEmployee()
 
     if (!employee) {
-      return response.status(401).json({
+      return response.status(403).json({
         message: 'Você não tem permissão para realizar essa ação.'
       })
     }
