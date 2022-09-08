@@ -32,7 +32,7 @@ export default class AdminsController {
         try {
             await Employee.findOrFail(params.id)
         } catch (error) {
-            return response.status(404).json('O funcionário não existe')
+            return response.status(404).json('O(A) funcionário(a) não existe')
         }
 
         // Verifica se o funcionário está cadastrado como admin
@@ -43,7 +43,7 @@ export default class AdminsController {
 
             return response.status(204)
         } catch (error) {
-            return response.badRequest('O funcionário não é um admin')
+            return response.badRequest('O(A) funcionário(a) não é um admin')
         }
     }
 

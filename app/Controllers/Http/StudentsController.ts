@@ -65,7 +65,7 @@ export default class StudentsController {
                 await student.save()
             }
         } catch (error) {
-            return response.badRequest('O usuário não é um aluno')
+            return response.badRequest('O usuário não é um(a) aluno(a)')
         }
 
         user.name = data.name
@@ -87,7 +87,7 @@ export default class StudentsController {
             const student = await Student.findByOrFail('userId', params.id)
 
             if (student.status == 'Expulso') {
-                return response.badRequest('O aluno já foi expulso')
+                return response.badRequest('O(A) aluno(a) já foi expulso(a)')
             }
 
             student.status = 'Expulso'
@@ -95,7 +95,7 @@ export default class StudentsController {
 
             return response.status(204)
         } catch (error) {
-            return response.badRequest('O usuário não é um aluno')
+            return response.badRequest('O usuário não é um(a) aluno(a)')
         }
     }
 

@@ -46,7 +46,7 @@ export default class CoursesController {
 
         course.name = data.name
         course.description = data.description
-        course.save()
+        await course.save()
 
         return response.status(204)
     }
@@ -61,7 +61,7 @@ export default class CoursesController {
     public async destroy({ params, response }: HttpContextContract) {
         const course = await Course.findOrFail(params.id)
 
-        course.delete()
+        await course.delete()
         
         return response.status(204)
     }

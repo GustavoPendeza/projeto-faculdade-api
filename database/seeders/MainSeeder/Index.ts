@@ -11,5 +11,6 @@ export default class extends BaseSeeder {
     await this.runSeeder(await import('../Employee'))
     await this.runSeeder(await import('../Admin'))
     await this.runSeeder(await import('../Student'))
+    await this.runSeeder(await import('../Course'))
   }
 }

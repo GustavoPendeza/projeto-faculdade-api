@@ -18,7 +18,7 @@ export default class UpdateStudentValidator {
       rules.unique({ table: 'users', column: 'email', caseInsensitive: true, whereNot: { id: this.refs.tenantId } })
     ]),
     status: schema.enum.optional(
-      ['Ativo', 'Expulso', 'Trancou'] as const
+      ['Ativo', 'Expulso', 'Trancado'] as const
     ),
   })
 
