@@ -1,11 +1,12 @@
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
-import Student from 'App/Models/Student'
+import StudentCourse from 'App/Models/StudentCourse'
 
 export default class extends BaseSeeder {
   public async run () {
-    await Student.createMany([
+    await StudentCourse.createMany([
       {
-        userId: 3
+        studentId: 1,
+        courseId: 2
       },
     ])
   }

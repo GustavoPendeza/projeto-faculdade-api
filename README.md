@@ -9,7 +9,7 @@ Um sistema para cadastrar alunos, professores e funcionários da secretaria (Adm
 
 ## Diagrama
 
-Para quem tiver curiosidade, vou deixar <a href="https://user-images.githubusercontent.com/53589614/188510289-afeac05a-75f5-45af-874b-d3c17c41166a.png">aqui</a> o DER do projeto.
+Para quem tiver curiosidade, vou deixar <a href="https://user-images.githubusercontent.com/53589614/188510289-afeac05a-75f5-45af-874b-d3c17c41166a.png" target="_blank">aqui</a> o DER do projeto.
 
 ## Tecnologias
 

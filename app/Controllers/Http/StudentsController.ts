@@ -38,7 +38,6 @@ export default class StudentsController {
 
         const student = new Student()
         student.userId = user.id
-        student.status = 'Ativo'
         await student.save()
 
         return response.created({ user, student })

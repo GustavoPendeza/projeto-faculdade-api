@@ -44,7 +44,6 @@ export default class StudentCoursesController {
         const studentCourse = new StudentCourse()
         studentCourse.studentId = data.studentId
         studentCourse.courseId = data.courseId
-        studentCourse.status = 'Ativo'
         await studentCourse.save()
 
         return response.created(studentCourse)
@@ -74,7 +73,7 @@ export default class StudentCoursesController {
         }
 
         studentCourse.status = data.status
-        studentCourse.save()
+        await studentCourse.save()
 
         return response.status(204)
     }

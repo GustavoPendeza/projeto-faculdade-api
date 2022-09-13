@@ -18,7 +18,7 @@ export default class extends BaseSchema {
         .references('courses.id')
         .onDelete('CASCADE')
         .notNullable()
-      table.string('status', 255).notNullable()
+      table.string('status', 255).notNullable().defaultTo("Ativo")
       table.timestamp('created_at', { useTz: true }).notNullable().defaultTo(this.now())
       table.timestamp('updated_at', { useTz: true }).notNullable().defaultTo(this.now())
     })
