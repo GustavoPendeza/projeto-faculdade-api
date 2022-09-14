@@ -19,6 +19,7 @@ Route.group(() => {
       Route.get('student/list', 'StudentsController.list')
       Route.get('student-course/list', 'StudentCoursesController.list')
       Route.get('lesson/list', 'LessonsController.list')
+      Route.get('schedule/list', 'SchedulesController.list')
 
       Route.post('employee/register', 'EmployeesController.register')
       Route.post('student/register', 'StudentsController.register')
@@ -26,6 +27,7 @@ Route.group(() => {
       Route.post('course/store', 'CoursesController.store')
       Route.post('student-course/store', 'StudentCoursesController.store')
       Route.post('lesson/store', 'LessonsController.store')
+      Route.post('schedule/store', 'SchedulesController.store')
 
       Route.patch('employee/update/:id', 'EmployeesController.update')
       Route.patch('user/update-password/:id', 'UsersController.updateUserPassword')

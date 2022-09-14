@@ -1,6 +1,8 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
 import Student from './Student'
+import Lesson from './Lesson'
+import Employee from './Employee'
 
 export default class Course extends BaseModel {
   @column({ isPrimary: true })
@@ -23,4 +25,15 @@ export default class Course extends BaseModel {
     pivotColumns: ['status', 'created_at', 'updated_at']
   })
   public student: ManyToMany<typeof Student>
+
+  @manyToMany(() => Lesson, {
+    pivotTable: 'schedules'
+  })
+  public lesson: ManyToMany<typeof Lesson>
+  
+  @manyToMany(() => Employee, {
+    pivotTable: 'schedules'
+  })
+  public employee: ManyToMany<typeof Employee>
+
 }
