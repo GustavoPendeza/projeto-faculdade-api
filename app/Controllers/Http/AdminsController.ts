@@ -28,12 +28,7 @@ export default class AdminsController {
      * @returns Response
      */
     public async destroy({ params, response }: HttpContextContract) {
-        // Verifica se o funcionário existe
-        try {
-            await Employee.findOrFail(params.id)
-        } catch (error) {
-            return response.status(404).json('O(A) funcionário(a) não existe')
-        }
+        await Employee.findOrFail(params.id)
 
         // Verifica se o funcionário está cadastrado como admin
         try {
@@ -43,7 +38,7 @@ export default class AdminsController {
 
             return response.status(204)
         } catch (error) {
-            return response.badRequest('O(A) funcionário(a) não é um admin')
+            return response.badGateway('O(A) funcionário(a) não é um admin')
         }
     }
 

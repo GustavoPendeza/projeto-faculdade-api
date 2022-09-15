@@ -19,7 +19,7 @@ export default class Employee extends BaseModel {
   public role: string
 
   @column()
-  public cnpj?: string
+  public cnpj: string | null
 
   @column.dateTime({ autoCreate: true, serialize: (value:DateTime) => value.toFormat("DD 'às' HH:mm:s") })
   public createdAt: DateTime

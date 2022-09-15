@@ -14,6 +14,21 @@ export default class extends BaseSeeder {
         role: 'Professor(a)',
         cnpj: "66677788000100"
       },
+      {
+        userId: 4,
+        role: 'Secretario(a)',
+        cnpj: "12345678000111"
+      },
+      {
+        userId: 5,
+        role: 'Professor(a)',
+        cnpj: "09876543000175"
+      },
+      {
+        userId: 6,
+        role: 'Professor(a)',
+        cnpj: "11111111000166"
+      },
     ])
   }
 }

@@ -75,7 +75,7 @@ export default class EmployeesController {
             }
             await employee.save()
         } catch (error) {
-            return response.badRequest('O usuário não é um(a) funcionário(a)')
+            return response.badGateway('O usuário não é um(a) funcionário(a)')
         }
 
         user.name = data.name

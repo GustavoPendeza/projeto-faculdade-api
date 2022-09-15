@@ -35,9 +35,9 @@ export default class StudentCoursesController {
 
         if (matriculated[0]) {
             if (matriculated[0].status == 'Aprovado') {
-                return response.badRequest('Esse(a) aluno(a) já concluiu esse curso')
+                return response.badGateway('Esse(a) aluno(a) já concluiu esse curso')
             } else if (matriculated[0].status == 'Trancado') {
-                return response.badRequest('Esse(a) aluno(a) trancou esse curso. Atualize o status do curso para Ativo novamente')
+                return response.badGateway('Esse(a) aluno(a) trancou esse curso. Atualize o status do curso para Ativo novamente')
             }
         }
 
@@ -68,7 +68,7 @@ export default class StudentCoursesController {
 
         if (verification[0]) {
             if (data.status == 'Ativo') {
-                return response.badRequest('Esse(a) aluno(a) já está cadastrado(a) em um curso no momento')
+                return response.badGateway('Esse(a) aluno(a) já está cadastrado(a) em um curso no momento')
             }
         }
 

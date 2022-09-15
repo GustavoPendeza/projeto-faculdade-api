@@ -36,12 +36,21 @@ Route.group(() => {
       Route.patch('course/update/:id', 'CoursesController.update')
       Route.patch('student-course/update/:id', 'StudentCoursesController.update')
       Route.patch('lesson/update/:id', 'LessonsController.update')
+      Route.patch('schedule/update/:id', 'SchedulesController.update')
 
       Route.delete('admin/delete/:id', 'AdminsController.destroy')
       Route.delete('course/delete/:id', 'CoursesController.destroy')
       Route.delete('lesson/delete/:id', 'LessonsController.destroy')
+      Route.delete('schedule/delete/:id', 'SchedulesController.destroy')
 
     }).middleware('admin')
+
+    //-------------------------ROTAS DE ALUNO-------------------------------
+    Route.group(() => {
+      
+      Route.post('enrollment/store', 'EnrollmentsController.store')
+
+    }).middleware('student')
 
   }).middleware('auth')
 
