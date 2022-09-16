@@ -17,9 +17,11 @@ Route.group(() => {
       Route.get('course/list', 'CoursesController.list')
       Route.get('employee/list', 'EmployeesController.list')
       Route.get('student/list', 'StudentsController.list')
+      Route.get('admin/list', 'AdminsController.list')
       Route.get('student-course/list', 'StudentCoursesController.list')
       Route.get('lesson/list', 'LessonsController.list')
-      Route.get('schedule/list', 'SchedulesController.list')
+      Route.get('schedule/list-admin', 'SchedulesController.listAdmin')
+      Route.get('enrollment/list-admin', 'EnrollmentsController.listAdmin')
 
       Route.post('employee/register', 'EmployeesController.register')
       Route.post('student/register', 'StudentsController.register')
@@ -45,10 +47,22 @@ Route.group(() => {
 
     }).middleware('admin')
 
+    //-------------------------ROTAS DE FUNCIONÁRIO--------------------------
+    Route.group(() => {
+
+      Route.patch('enrollment/grade-update/:id', 'EnrollmentsController.gradeUpdate')
+
+    }).middleware('employee')
+
     //-------------------------ROTAS DE ALUNO-------------------------------
     Route.group(() => {
       
+      Route.get('schedule/list-student', 'SchedulesController.listStudent')
+      Route.get('enrollment/list-student', 'EnrollmentsController.listStudent')
+
       Route.post('enrollment/store', 'EnrollmentsController.store')
+
+      Route.patch('enrollment/unenroll/:id', 'EnrollmentsController.unenroll')
 
     }).middleware('student')
 

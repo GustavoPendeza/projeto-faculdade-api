@@ -1,5 +1,7 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Schedule from 'App/Models/Schedule'
+import Student from 'App/Models/Student'
+import StudentCourse from 'App/Models/StudentCourse'
 import CreateScheduleValidator from 'App/Validators/CreateScheduleValidator'
 import UpdateScheduleValidator from 'App/Validators/UpdateScheduleValidator'
 
@@ -8,10 +10,33 @@ export default class SchedulesController {
     /**
      * Retorna uma lista de aulas
      * 
-     * @returns Array<Schedule>
+     * @returns Array<Schedule, Course, Lesson, Employee>
      */
-    public async list() {
+    public async listAdmin() {
         const schedules = await Schedule.query().select('*')
+            .preload('course')
+            .preload('lesson')
+            .preload('employee')
+
+        return schedules
+    }
+
+    /**
+     * Retorna uma lista das aulas do curso em que o aluno autenticado está ativo
+     * 
+     * @param auth AuthContract
+     * @returns Array<Schedule, Course, Lesson, Employee>
+     */
+    public async listStudent({ auth }: HttpContextContract) {
+        const student = await Student.findByOrFail('userId', auth.user!.id)
+
+        const course = await StudentCourse.query()
+            .where('studentId', student.id)
+            .andWhere('status', 'Ativo')
+            .first()
+
+        const schedules = await Schedule.query().select('*')
+            .where('courseId', course!.courseId)
             .preload('course')
             .preload('lesson')
             .preload('employee')

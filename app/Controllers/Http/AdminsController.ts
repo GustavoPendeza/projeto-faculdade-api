@@ -4,6 +4,18 @@ import Employee from 'App/Models/Employee'
 import CreateAdminValidator from 'App/Validators/CreateAdminValidator'
 
 export default class AdminsController {
+    
+    /**
+     * Retorna uma lista dos Admins
+     * 
+     * @returns Array<Admin, Employee>
+     */
+    public async list() {
+        const admins = await Admin.query().select('*')
+            .preload('employee')
+
+        return admins
+    }
 
     /**
      * Cadastra um funcionário como admin
