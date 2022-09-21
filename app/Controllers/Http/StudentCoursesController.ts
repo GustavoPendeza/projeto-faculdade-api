@@ -1,4 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import Enrollment from 'App/Models/Enrollment'
+import Student from 'App/Models/Student'
 import StudentCourse from 'App/Models/StudentCourse'
 import CreateStudentCourseValidator from 'App/Validators/CreateStudentCourseValidator'
 import UpdateStudentCourseValidator from 'App/Validators/UpdateStudentCourseValidator'
@@ -72,8 +74,24 @@ export default class StudentCoursesController {
             }
         }
 
+        if (data.status == 'Aprovado') {
+            const enrollments = await Enrollment.query().select('*')
+                .where('studentId', studentCourse.studentId)
+                .andWhere('status', 'Ativo')
+
+            if (enrollments[0]) {
+                return response.badGateway('O(A) aluno(a) ainda tem aulas ativas')
+            }
+        }
+
         studentCourse.status = data.status
         await studentCourse.save()
+
+        if (data.status == 'Trancado') {
+            const student = await Student.findOrFail(studentCourse.studentId)
+
+            await student.changeStatus(data.status)
+        }
 
         return response.status(204)
     }

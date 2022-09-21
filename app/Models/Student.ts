@@ -3,6 +3,8 @@ import { BaseModel, BelongsTo, belongsTo, column, ManyToMany, manyToMany } from 
 import User from './User'
 import Course from './Course'
 import Schedule from './Schedule'
+import StudentCourse from './StudentCourse'
+import Enrollment from './Enrollment'
 
 export default class Student extends BaseModel {
   @column({ isPrimary: true })
@@ -35,4 +37,31 @@ export default class Student extends BaseModel {
   })
   public schedule: ManyToMany<typeof Schedule>
   
+  /**
+     * Altera os status de StudentCourse e Enrollment de um aluno
+     * 
+     * @param status string: [Trancado, Expulso]
+     */
+   public async changeStatus(status: string) {
+
+    const studentCourse = await StudentCourse.query().select('*')
+        .where('studentId', this.id)
+        .andWhere('status', 'Ativo')
+
+    if (studentCourse[0]) {
+        studentCourse[0].status = status
+        await studentCourse[0].save()
+    }
+
+    const enrollments = await Enrollment.query().select('*')
+        .where('studentId', this.id)
+        .andWhere('status', 'Ativo')
+
+    enrollments.forEach(enrollment => {
+        enrollment.status = status
+        enrollment.save()
+    });
+
+}
+
 }

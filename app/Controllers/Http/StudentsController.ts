@@ -62,6 +62,10 @@ export default class StudentsController {
             if (data.status) {
                 student.status = data.status
                 await student.save()
+
+                if (data.status == 'Trancado') {
+                    await student.changeStatus(data.status)
+                }
             }
         } catch (error) {
             return response.badGateway('O usuário não é um(a) aluno(a)')
@@ -91,6 +95,8 @@ export default class StudentsController {
 
             student.status = 'Expulso'
             await student.save()
+
+            await student.changeStatus('Expulso')
 
             return response.status(204)
         } catch (error) {
