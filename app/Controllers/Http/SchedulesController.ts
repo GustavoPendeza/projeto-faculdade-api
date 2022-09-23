@@ -12,7 +12,7 @@ export default class SchedulesController {
      * 
      * @returns Array<Schedule, Course, Lesson, Employee>
      */
-    public async listAdmin() {
+    public async listForAdmin() {
         const schedules = await Schedule.query().select('*')
             .preload('course')
             .preload('lesson')
@@ -25,9 +25,10 @@ export default class SchedulesController {
      * Retorna uma lista das aulas do curso em que o aluno autenticado está ativo
      * 
      * @param auth AuthContract
+     * @param response ResponseContract
      * @returns Array<Schedule, Course, Lesson, Employee>
      */
-    public async listStudent({ auth }: HttpContextContract) {
+    public async listForStudent({ auth, response }: HttpContextContract) {
         const student = await Student.findByOrFail('userId', auth.user!.id)
 
         const course = await StudentCourse.query()
@@ -35,8 +36,12 @@ export default class SchedulesController {
             .andWhere('status', 'Ativo')
             .first()
 
+        if (!course) {
+            return response.badGateway('Você não está cursando nada no momento')
+        }
+
         const schedules = await Schedule.query().select('*')
-            .where('courseId', course!.courseId)
+            .where('courseId', course[0]!.courseId)
             .preload('course')
             .preload('lesson')
             .preload('employee')

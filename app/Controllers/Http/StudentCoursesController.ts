@@ -74,7 +74,7 @@ export default class StudentCoursesController {
             }
         }
 
-        if (data.status == 'Aprovado') {
+        if (data.status == 'Aprovado' || data.status == 'Reprovado') {
             const enrollments = await Enrollment.query().select('*')
                 .where('studentId', studentCourse.studentId)
                 .andWhere('status', 'Ativo')
@@ -84,14 +84,16 @@ export default class StudentCoursesController {
             }
         }
 
-        studentCourse.status = data.status
-        await studentCourse.save()
-
-        if (data.status == 'Trancado') {
+        if (data.status == 'Trancado' && studentCourse.status == 'Ativo') {
             const student = await Student.findOrFail(studentCourse.studentId)
 
             await student.changeStatus(data.status)
+
+            return response.status(204)
         }
+
+        studentCourse.status = data.status
+        await studentCourse.save()
 
         return response.status(204)
     }

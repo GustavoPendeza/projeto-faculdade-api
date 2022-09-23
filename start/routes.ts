@@ -20,8 +20,8 @@ Route.group(() => {
       Route.get('admin/list', 'AdminsController.list')
       Route.get('student-course/list', 'StudentCoursesController.list')
       Route.get('lesson/list', 'LessonsController.list')
-      Route.get('schedule/list-admin', 'SchedulesController.listAdmin')
-      Route.get('enrollment/list-admin', 'EnrollmentsController.listAdmin')
+      Route.get('schedule/list-admin', 'SchedulesController.listForAdmin')
+      Route.get('enrollment/list-admin', 'EnrollmentsController.listForAdmin')
 
       Route.post('employee/register', 'EmployeesController.register')
       Route.post('student/register', 'StudentsController.register')
@@ -57,8 +57,8 @@ Route.group(() => {
     //-------------------------ROTAS DE ALUNO-------------------------------
     Route.group(() => {
       
-      Route.get('schedule/list-student', 'SchedulesController.listStudent')
-      Route.get('enrollment/list-student', 'EnrollmentsController.listStudent')
+      Route.get('schedule/list-student', 'SchedulesController.listForStudent')
+      Route.get('enrollment/list-student', 'EnrollmentsController.listForStudent')
 
       Route.post('enrollment/store', 'EnrollmentsController.store')
 

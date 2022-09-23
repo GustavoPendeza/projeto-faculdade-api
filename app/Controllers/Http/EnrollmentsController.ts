@@ -14,7 +14,7 @@ export default class EnrollmentsController {
      * 
      * @returns Array<Enrollment, Student, Schedule>
      */
-    public async listAdmin() {
+    public async listForAdmin() {
         const enrollments = await Enrollment.query().select('*')
             .preload('student')
             .preload('schedule')
@@ -28,14 +28,14 @@ export default class EnrollmentsController {
      * @param auth AuthContract
      * @returns Array<Enrollment, Student, Schedule>
      */
-    public async listStudent({ auth }: HttpContextContract) {
+    public async listForStudent({ auth }: HttpContextContract) {
         const student = await Student.findByOrFail('userId', auth.user!.id)
 
         const enrollments = await Enrollment.query().select('*')
             .where('studentId', student.id)
             .preload('student')
             .preload('schedule')
-        
+
         return enrollments
     }
 
@@ -58,6 +58,10 @@ export default class EnrollmentsController {
             .where('studentId', student.id)
             .andWhere('status', 'Ativo')
             .first()
+
+        if (!course) {
+            return response.badGateway('Você não está cursando nada no momento')
+        }
 
         if (schedule.courseId != course!.courseId) {
             return response.badGateway('Essa aula não faz parte do seu curso, escolha outra.')
@@ -109,14 +113,14 @@ export default class EnrollmentsController {
 
         if (schedule.employeeId != employee.id) {
             return response.status(403).json({
-                message: 'Você não pode alterar a nota desse aluno, pois não é o professor dessa matéria'
+                message: 'Não pode alterar a nota desse(a) aluno(a), pois não é o(a) professor(a) dessa matéria'
             })
         }
 
         const data = await request.validate(UpdateGradeEnrollmentValidator)
 
         enrollment.grade = data.grade
-        
+
         if (data.grade >= 6) {
             enrollment.status = 'Aprovado'
         } else {
@@ -143,7 +147,7 @@ export default class EnrollmentsController {
 
         if (enrollment.studentId != student.id) {
             return response.status(403).json({
-                message: 'Essa matrícula é de outro aluno'
+                message: 'Não tem autorização para cancelar essa matrícula'
             })
         }
 

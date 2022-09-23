@@ -1,11 +1,11 @@
-# Projeto Faculdade API (Em andamento)
+# Projeto Faculdade API
 
 ## Sobre
 
 Atualização do <a href="https://github.com/GustavoPendeza/projeto-escola-api">Projeto Escola API</a>. <br>
-Quis usar o método de herança e melhorar o banco de dados do projeto.
+Quis usar o método de herança e melhorar o modelo e o banco de dados do projeto.
 
-Um sistema para cadastrar alunos, professores e funcionários da secretaria (Admins). Os professores serão cadastrados na grade de aulas e os alunos podem se matricular nelas (no máximo 4 por trimestre), mas só se forem do curso ao que pertence.
+Um sistema para cadastrar alunos, professores e funcionários da secretaria (Admins). Os professores serão cadastrados na grade de aulas e os alunos podem se matricular nelas (no máximo 4 aulas por vez), mas só se forem do curso ao que pertence.
 
 ## Diagrama
 
@@ -15,6 +15,7 @@ Para quem tiver curiosidade, vou deixar <a href="https://user-images.githubuserc
 
 <div>
     <img alt="AdonisJS" title="AdonisJS" src="https://img.shields.io/badge/adonis%20js-220052?style=for-the-badge&logo=adonisjs&logoColor=white">
+    <img alt="NodeJS" title="NodeJS" src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white">
     <img alt="TypeScript" title="TypeScript" src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white">
     <img alt="MySQL" title="MySQL" src="https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white">
 </div>
