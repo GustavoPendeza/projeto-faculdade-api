@@ -8,6 +8,10 @@ export default class extends BaseSeeder {
         studentId: 1,
         courseId: 2
       },
+      {
+        studentId: 2,
+        courseId: 1
+      },
     ])
   }
 }

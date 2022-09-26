@@ -19,6 +19,16 @@ export default class extends BaseSeeder {
         lessonId: 1,
         employeeId: 2
       },
+      {
+        courseId: 1,
+        lessonId: 2,
+        employeeId: 5
+      },
+      {
+        courseId: 2,
+        lessonId: 4,
+        employeeId: 6
+      },
     ])
   }
 }

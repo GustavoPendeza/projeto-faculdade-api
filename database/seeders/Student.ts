@@ -7,6 +7,9 @@ export default class extends BaseSeeder {
       {
         userId: 3
       },
+      {
+        userId: 7
+      },
     ])
   }
 }

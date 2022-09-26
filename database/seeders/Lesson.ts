@@ -20,6 +20,14 @@ export default class extends BaseSeeder {
         name: "Programação Orientada a Objetos",
         description: "É um paradigma de programação baseado no conceito de 'objetos', que podem conter dados na forma de campos, também conhecidos como atributos, e códigos, na forma de procedimentos, também conhecidos como métodos."
       },
+      {
+        name: "Banco de Dados",
+        description: "Nessa disciplina você vai conhecer os principais sistemas de banco de dados e aprender como utilizá-los para armazenar todos os tipos de dados."
+      },
+      {
+        name: "Planejamento Estratégico",
+        description: "O conceito de planejamento estratégico se refere a um processo sistêmico que permite definir o melhor caminho a ser seguido por uma organização, para atingir um ou mais objetivos, dentro de um contexto previamente analisado. Isso se faz analisando cenários, definindo metas e ações que permitirão chegar onde se deseja."
+      },
     ])
   }
 }
